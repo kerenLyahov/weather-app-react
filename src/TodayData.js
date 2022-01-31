@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./TodayData.css";
 
 export default function TodayData() {
+  let [cityName, setCityName] = useState("");
   function city() {
-    let city = "cityName";
-    return city;
+    return "cityName";
   }
   function day() {
     let day = "MONDAY";

@@ -20,7 +20,6 @@
 }
 .parameters {
   background-color: palevioletred;
-
   margin-top: 0;
   width: 40%;
 }
@@ -43,7 +42,6 @@
 .units {
   background-color: purple;
   width: 10%;
-  /* height: 50px; */
 }
 .temperature {
   background-color: blue;
