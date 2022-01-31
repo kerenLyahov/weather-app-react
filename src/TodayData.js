@@ -9,7 +9,7 @@ export default function TodayData() {
   }
   function day() {
     let day = "MONDAY";
-    return day;
+    return <div> {day} </div>;
   }
   function tempMinMax() {
     return <div>13°/26°</div>;
@@ -28,14 +28,21 @@ export default function TodayData() {
     );
   }
   return (
-    <div className="body">
-      <span className="nameTemp">
-        <span className="cityName"> {city()}</span>
-        <span className="tempMinMax"> {tempMinMax()}</span>
+    <div className="bodyMain">
+      <span className="cityName child"> {city()}</span>
+      <span className="tempMinMax child"> {tempMinMax()}</span>
+      <span className="day child"> {day()}</span>
+      <span className="temperature">22°</span>
+      <span className="units">
+        <span className="celsius">C</span>
+        <br />-<br />
+        <span className="fahrenheit">F</span>
       </span>
-      {day()}
-      {date()}
-      {parameters()}
+      <span className="date child">{date()}</span>
+      <span className="icon">icon</span>
+      <span className="parameters child">{parameters()}</span>
+
+      <span>description</span>
     </div>
   );
 }

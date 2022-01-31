@@ -1,19 +1,56 @@
-.body {
+.bodyMain {
   border: 1px solid #ff68ab;
   border-radius: 4px;
   padding: 5px 5px 7px 5px;
   margin: 15px 150px 4px 150px;
+  display: flex;
+  flex-wrap: wrap;
+  /* min-height: 100%; */
 }
-
+.child {
+  margin: 10px;
+  border-radius: 10px;
+  background-color: lightblue;
+}
 .cityName {
-  align-items: stretch;
-  align-self: flex-start;
   font-size: 60px;
+  background-color: darkred;
+  width: 50%;
+  margin-right: 40px;
+}
+.parameters {
+  background-color: palevioletred;
+
+  margin-top: 0;
+  width: 40%;
 }
 .tempMinMax {
-  align-items: stretch;
-  display: inline;
+  width: 150px;
+  background-color: darkgreen;
+  width: 35%;
 }
-.nameTemp {
-  align-items: stretch;
+.day {
+  background-color: khaki;
+  width: 40%;
+  height: 50px;
+}
+.date {
+  background-color: palevioletred;
+  height: 50px;
+  margin-top: 0;
+  width: 40%;
+}
+.units {
+  background-color: purple;
+  width: 10%;
+  /* height: 50px; */
+}
+.temperature {
+  background-color: blue;
+  width: 25%;
+  margin-left: 80px;
+}
+.icon {
+  background-color: tomato;
+  width: 50%;
 }
