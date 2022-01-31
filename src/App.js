@@ -1,17 +1,32 @@
 import "./App.css";
 import React, { useState } from "react";
-import Search from "./Search";
+// import Search from "./Search";
 import TodayData from "./TodayData";
 import Forecast from "./Forecast";
 function App() {
   let [cityName, setCityName] = useState("");
-  Search();
-  TodayData();
-  Forecast();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+  function updateCity(event) {
+    setCityName(event.target.value);
+  }
+
   return (
     <div className="App">
-      <Search />
-      <TodayData />
+      <div className="searchBody">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="search"
+            placeholder="Enter a city"
+            onChange={updateCity}
+          />
+          <input type="submit" className="searchButton" value="search" />
+        </form>
+        <button>current</button>
+      </div>
+      <TodayData city={cityName} />
       <Forecast />
     </div>
   );
