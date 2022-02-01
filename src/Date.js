@@ -1,3 +1,4 @@
+import react from "react";
 export default function Day() {
   let date = new Date();
   let month = [

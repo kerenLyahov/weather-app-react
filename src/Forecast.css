@@ -1,11 +1,31 @@
 .body {
-  border: 1px solid #ff68ab;
+  border: 3px solid;
   border-radius: 4px;
   padding: 5px 5px 7px 5px;
   margin: 15px 150px 4px 150px;
+
+  animation: borderAnimation 5s infinite alternate;
+  background-image: linear-gradient(
+    rgba(150, 220, 241, 0.5),
+    rgba(32, 160, 245, 0.5)
+  );
+}
+@keyframes borderAnimation {
+  0% {
+    border-color: #225763;
+  }
+  33% {
+    border-color: #41d8bf;
+  }
+  66% {
+    border-color: #2f89b3;
+  }
+  100% {
+    border-color: #3b50b2;
+  }
 }
 
 .forcast {
   display: inline-block;
-  margin: 4px 19px;
+  margin: 4px 3.5%;
 }
