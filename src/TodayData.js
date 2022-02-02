@@ -9,16 +9,19 @@ export default function TodayData(props) {
   let [windspeed, setWindspeed] = useState("");
   let [sunrise, setSunrise] = useState("");
   let [sunset, setSunset] = useState("");
-  let [MinMax, setMinMax] = useState(`⬇15°     ⬆30°`);
-  let [temp, setTemp] = useState("22°");
+  let [MinMax, setMinMax] = useState(`⬇0°     ⬆0°`);
+  let [temp, setTemp] = useState("0°");
   let [descriptionValue, setDescriptionValue] = useState("cloudy");
   let celsiusValue = "C";
   let fahrenheitValue = "F";
   let [fahrenheitStyle, setFahrenheitStyle] = useState({ fontSize: "15px" });
   let [celsiusStyle, setCelsiusStyle] = useState({ fontSize: "25px" });
   let [unit, setUnit] = useState(`metric`);
+  let [city, setCity] = useState("jerusalem");
+
+  console.log(city);
   let key = `307efdb71bc67507048c93662d7db9da`;
-  let URL = `https://api.openweathermap.org/data/2.5/weather?q=jerusalem&units=${unit}&appid=${key}`;
+  let URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${key}`;
   axios.get(URL).then(parameters);
   axios.get(URL).then(tempMinMax);
   axios.get(URL).then(temperature);
@@ -33,7 +36,7 @@ export default function TodayData(props) {
 
       timeUp = new Date(response.data.sys.sunrise * 1000);
       timeDown = new Date(response.data.sys.sunset * 1000);
-      console.log(timeDown);
+
       setSunrise(`${timeUp.getHours} : ${timeUp.getMinutes}`);
       setSunset(`${timeDown.getHours} : ${timeDown.getMinutes}`);
     } else {
@@ -48,6 +51,7 @@ export default function TodayData(props) {
     );
   }
   function cityName() {
+    // setCity(props.city);
     return props.city === "" ? "Jerusalem" : props.city;
   }
 
@@ -63,7 +67,7 @@ export default function TodayData(props) {
   }
   function temperature(response) {
     if (response !== undefined) {
-      setTemp(Math.roung(response.data.main.temp));
+      setTemp(Math.round(response.data.main.temp));
     }
     return <div>{temp}</div>;
   }
