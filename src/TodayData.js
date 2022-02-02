@@ -11,33 +11,39 @@ export default function TodayData(props) {
   let [sunset, setSunset] = useState("");
   let [MinMax, setMinMax] = useState(`⬇15°     ⬆30°`);
   let [temp, setTemp] = useState("22°");
+  let [descriptionValue, setDescriptionValue] = useState("cloudy");
   let celsiusValue = "C";
   let fahrenheitValue = "F";
   let [fahrenheitStyle, setFahrenheitStyle] = useState({ fontSize: "15px" });
   let [celsiusStyle, setCelsiusStyle] = useState({ fontSize: "25px" });
-  let unit = `metric`;
+  let [unit, setUnit] = useState(`metric`);
   let key = `307efdb71bc67507048c93662d7db9da`;
   let URL = `https://api.openweathermap.org/data/2.5/weather?q=jerusalem&units=${unit}&appid=${key}`;
   // axios.get(URL).then(parameters);
   // axios.get(URL).then(tempMinMax);
   // axios.get(URL).then(temperature);
+  // axios.get(URL).then(description);
 
   function parameters(response) {
+    let timeUp = "";
+    let timeDown = "";
     if (response !== undefined) {
       setHumidity(response.data.main.humidity);
       setWindspeed(response.data.wind.speed);
-      setSunrise(response.data.sys.sunrise * 1000);
-      setSunset(response.data.sys.sunset);
-      let sunriseTime = new Date(sunrise);
-      console.log(sunriseTime);
+
+      timeUp = new Date(response.data.sys.sunrise * 1000);
+      timeDown = new Date(response.data.sys.sunset * 1000);
+      console.log(timeDown);
+      setSunrise(`${timeUp.getHours} : ${timeUp.getMinutes}`);
+      setSunset(`${timeDown.getHours} : ${timeDown.getMinutes}`);
     } else {
     }
     return (
       <div>
-        <div>windspeed: {windspeed}</div>
+        <div>Windspeed: {windspeed}</div>
         <div>Humidity: {humidity}</div>
-        <div>sunrise: {sunrise}</div>
-        <div>sunset: {sunset}</div>
+        <div>Sunrise: {sunrise}</div>
+        <div>Sunset: {sunset}</div>
       </div>
     );
   }
@@ -48,20 +54,22 @@ export default function TodayData(props) {
   function tempMinMax(response) {
     if (response !== undefined) {
       setMinMax(
-        `⬇${response.data.main.temp_min}     ⬆${response.data.main.temp_max} `
+        `⬇${Math.round(response.data.main.temp_min)}     ⬆${Math.round(
+          response.data.main.temp_max
+        )} `
       );
     }
     return <div>{MinMax}</div>;
   }
   function temperature(response) {
     if (response !== undefined) {
-      setTemp(response.data.main.temp);
+      setTemp(Math.roung(response.data.main.temp));
     }
     return <div>{temp}</div>;
   }
   function celsius(event) {
     event.preventDefault();
-    unit = `metric`;
+    setUnit(`metric`);
     setFahrenheitStyle({ fontSize: "15px" });
     setCelsiusStyle({ fontSize: "25px" });
     return (
@@ -74,9 +82,10 @@ export default function TodayData(props) {
   }
   function fahrenheit(event) {
     event.preventDefault();
-    unit = `imperial`;
+    setUnit(`imperial`);
     setFahrenheitStyle({ fontSize: "25px" });
     setCelsiusStyle({ fontSize: "15px" });
+
     return (
       <div>
         {unit}
@@ -84,6 +93,12 @@ export default function TodayData(props) {
         {fahrenheitStyle}
       </div>
     );
+  }
+  function description(response) {
+    if (response !== undefined) {
+      setDescriptionValue(response.data.weather[0].description);
+    }
+    return <div>{descriptionValue}</div>;
   }
 
   return (
@@ -110,7 +125,7 @@ export default function TodayData(props) {
       <span className="icon child">icon</span>
       <span className="parameters child">{parameters()}</span>
 
-      <span className="description child">description</span>
+      <span className="description child">{description()}</span>
     </div>
   );
 }
