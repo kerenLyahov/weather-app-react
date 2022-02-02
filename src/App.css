@@ -48,3 +48,10 @@ button {
   padding: 5px 9px;
   font-family: "Rubik", sans-serif;
 }
+#opnSrcLink {
+  text-align: left;
+  font-family: "Luxurious Roman", cursive;
+  margin-left: 20%;
+  max-width: 800px;
+  min-width: 730px;
+}

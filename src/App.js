@@ -28,6 +28,16 @@ function App() {
       </div>
       <TodayData city={cityName} />
       <Forecast />
+      <div id="opnSrcLink">
+        <a
+          href="https://github.com/kerenLyahov/weather-app-react"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open-source code
+        </a>{" "}
+        by Keren Lyahovchook
+      </div>
     </div>
   );
 }
