@@ -32,11 +32,12 @@
   /* background-color: rgba(25, 125, 158, 0.226); */
 }
 .cityName {
-  font-size: 60px;
+  font-size: 50px;
   /* background-color: rgba(139, 0, 0, 0.5); */
-  width: 50%;
-  margin-right: 40px;
+  width: 60%;
+  margin-right: -2px;
   font-family: "Roboto Slab", serif;
+  text-align: left;
 }
 .parameters {
   /* background-color: rgba(216, 112, 147, 0.5); */
@@ -54,6 +55,7 @@
   padding-top: 30px;
   padding-right: 10px;
   font-size: 18px;
+  margin-left: 0;
 }
 .day {
   /* background-color: rgba(240, 230, 140, 0.5); */
