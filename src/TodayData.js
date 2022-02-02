@@ -19,10 +19,10 @@ export default function TodayData(props) {
   let [unit, setUnit] = useState(`metric`);
   let key = `307efdb71bc67507048c93662d7db9da`;
   let URL = `https://api.openweathermap.org/data/2.5/weather?q=jerusalem&units=${unit}&appid=${key}`;
-  // axios.get(URL).then(parameters);
-  // axios.get(URL).then(tempMinMax);
-  // axios.get(URL).then(temperature);
-  // axios.get(URL).then(description);
+  axios.get(URL).then(parameters);
+  axios.get(URL).then(tempMinMax);
+  axios.get(URL).then(temperature);
+  axios.get(URL).then(description);
 
   function parameters(response) {
     let timeUp = "";
