@@ -6,7 +6,6 @@ import Date from "./Date.js";
 export default function TodayData(props) {
   let celsiusValue = "C";
   let fahrenheitValue = "F";
-
   let [unit, setUnit] = useState({
     unit: `metric`,
     fahrenheitStyle: { fontSize: "15px" },
@@ -60,7 +59,12 @@ export default function TodayData(props) {
         </a>
       </span>
       <span className="date child">{Date()}</span>
-      <span className="icon child">icon</span>
+      <span className="icon child">
+        <img
+          src={`http://openweathermap.org/img/wn/${props.iconID}@2x.png`}
+          alt="weather icon"
+        />
+      </span>
       <span className="parameters child">
         <div>Windspeed: {props.windspeedValue} </div>
         <div>Humidity: {props.humidityValue}</div>

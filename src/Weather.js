@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Datetime from "react-datetime";
 import TodayData from "./TodayData";
 import Forecast from "./Forecast";
 
@@ -8,8 +7,6 @@ export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
 
   function handleResponse(response) {
-    console.log(response);
-
     setWeatherData({
       ready: true,
       temp: Math.round(response.data.main.temp),
@@ -24,6 +21,7 @@ export default function Weather(props) {
       sunset: new Date(response.data.sys.sunset * 1000),
       longitude: response.data.coord.lon,
       latitude: response.data.coord.lat,
+      icon: response.data.weather[0].icon,
     });
   }
 
@@ -34,11 +32,12 @@ export default function Weather(props) {
           windspeedValue={weatherData.windspeed}
           humidityValue={weatherData.humidity}
           descriptionValue={weatherData.description}
-          //   sunriseValue={weatherData.sunrise}
-          //   sunsetValue={weatherData.sunset}
+          sunriseValue={`${weatherData.sunrise.getHours()}:${weatherData.sunrise.getMinutes()}`}
+          sunsetValue={`${weatherData.sunset.getHours()}:${weatherData.sunset.getMinutes()}`}
           minmaxValue={weatherData.MinMax}
           tempValue={weatherData.temp}
           cityValue={weatherData.city}
+          iconID={weatherData.icon}
         />
         <Forecast lon={weatherData.longitude} lat={weatherData.latitude} />
       </div>
