@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./TodayData.css";
 import Day from "./Day.js";
 import Date from "./Date.js";
@@ -7,36 +6,32 @@ import Date from "./Date.js";
 export default function TodayData(props) {
   let celsiusValue = "C";
   let fahrenheitValue = "F";
-  let [fahrenheitStyle, setFahrenheitStyle] = useState({ fontSize: "15px" });
-  let [celsiusStyle, setCelsiusStyle] = useState({ fontSize: "25px" });
-  let [unit, setUnit] = useState(`metric`);
+
+  let [unit, setUnit] = useState({
+    unit: `metric`,
+    fahrenheitStyle: { fontSize: "15px" },
+    celsiusStyle: { fontSize: "25px" },
+  });
 
   function celsius(event) {
     event.preventDefault();
-    setUnit(`metric`);
-    setFahrenheitStyle({ fontSize: "15px" });
-    setCelsiusStyle({ fontSize: "25px" });
-    return (
-      <div>
-        {unit}
-        {celsiusStyle}
-        {fahrenheitStyle}
-      </div>
-    );
+    setUnit({
+      unit: `metric`,
+      fahrenheitStyle: { fontSize: "15px" },
+      celsiusStyle: { fontSize: "25px" },
+    });
+
+    return <div>{unit}</div>;
   }
   function fahrenheit(event) {
     event.preventDefault();
-    setUnit(`imperial`);
-    setFahrenheitStyle({ fontSize: "25px" });
-    setCelsiusStyle({ fontSize: "15px" });
+    setUnit({
+      unit: `imperial`,
+      fahrenheitStyle: { fontSize: "25px" },
+      celsiusStyle: { fontSize: "15px" },
+    });
 
-    return (
-      <div>
-        {unit}
-        {celsiusStyle}
-        {fahrenheitStyle}
-      </div>
-    );
+    return <div>{unit}</div>;
   }
 
   return (
@@ -46,14 +41,19 @@ export default function TodayData(props) {
       <span className="day child"> {Day()}</span>
       <span className="temperature child">{props.tempValue}</span>
       <span className="units child">
-        <a href="" className="celsius" style={celsiusStyle} onClick={celsius}>
+        <a
+          href=""
+          className="celsius"
+          style={unit.celsiusStyle}
+          onClick={celsius}
+        >
           {celsiusValue}
         </a>
         <br />
         <a
           href=""
           className="fahrenheit"
-          style={fahrenheitStyle}
+          style={unit.fahrenheitStyle}
           onClick={fahrenheit}
         >
           {fahrenheitValue}
@@ -62,7 +62,7 @@ export default function TodayData(props) {
       <span className="date child">{Date()}</span>
       <span className="icon child">icon</span>
       <span className="parameters child">
-        <div>Windspeed: {props.windspeedValue}</div>
+        <div>Windspeed: {props.windspeedValue} </div>
         <div>Humidity: {props.humidityValue}</div>
         <div>Sunrise: {props.sunriseValue}</div>
         <div>Sunset: {props.sunsetValue}</div>

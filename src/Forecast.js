@@ -7,15 +7,14 @@ export default function Forcast(props) {
   let dayName = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   let days = [0, 1, 2, 3, 4];
   let temp = ["12/13", "2/20", "10/15", "2/33", "0/15"];
-  let latValue = props.Lat;
-  let lonValue = props.Lon;
+
   let unit = "metric";
-  let key = `5902ca1c1724d1c12a893427498472ff`;
-  let URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${latValue}&lon=${lonValue}&units=${unit}&exclude=current,minutely,alerts&appid=${key}`;
-  axios.get(URL).then(handleAPI);
+  let key = `f2178afe12518dc511aab62330608529`;
+  let URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.lat}&lon=${props.lon}&units=${unit}&exclude=current,minutely,alerts&appid=${key}`;
+  //axios.get(URL).then(handleAPI);
   function handleAPI(response) {
     if (response !== undefined) {
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 5; i++) {
         temp[
           i
         ] = `${response.data.daily[i].temp.min} / ${response.data.daily[i].temp.max}`;
