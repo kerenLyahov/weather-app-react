@@ -38,7 +38,7 @@ export default function TodayData(props) {
       <span className="cityName child"> {props.cityValue}</span>
       <span className="tempMinMax child"> {props.minmaxValue}</span>
       <span className="day child"> {Day()}</span>
-      <span className="temperature child">{props.tempValue}</span>
+      <span className="temperature child">{props.tempValue}°</span>
       <span className="units child">
         <a
           href=""

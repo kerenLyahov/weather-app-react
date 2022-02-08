@@ -28,9 +28,9 @@ export default function Weather(props) {
       description: response.data.weather[0].description,
       windspeed: response.data.wind.speed,
       humidity: response.data.main.humidity,
-      MinMax: `⬇${Math.round(response.data.main.temp_min)}     ⬆${Math.round(
+      MinMax: `⬇${Math.round(response.data.main.temp_min)}° ⬆${Math.round(
         response.data.main.temp_max
-      )} `,
+      )}° `,
       city: response.data.name,
       sunrise: new Date(response.data.sys.sunrise * 1000),
       sunset: new Date(response.data.sys.sunset * 1000),
