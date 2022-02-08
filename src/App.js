@@ -2,19 +2,19 @@ import "./App.css";
 import React, { useState } from "react";
 import Weather from "./Weather";
 function App() {
-  let [cityName, setCityName] = useState("Jerusalem");
+  // let [cityName, setCityName] = useState("Jerusalem");
 
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  // }
 
-  function updateCity(event) {
-    setCityName(event.target.value);
-  }
+  // function updateCity(event) {
+  //   setCityName(event.target.value);
+  // }
 
   return (
     <div className="App">
-      <div className="searchBody">
+      {/* <div className="searchBody">
         <form onSubmit={handleSubmit}>
           <input
             type="search"
@@ -24,9 +24,9 @@ function App() {
           <input type="submit" className="searchButton" value="search" />
         </form>
         <button>current</button>
-      </div>
+      </div> */}
 
-      <Weather city={cityName} />
+      <Weather city={"london"} />
 
       <div id="opnSrcLink">
         <a

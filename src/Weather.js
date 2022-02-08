@@ -5,7 +5,22 @@ import Forecast from "./Forecast";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({ ready: false });
+  let [cityName, setCityName] = useState(props.city);
+  function search() {
+    const ApiKey = `f2178afe12518dc511aab62330608529`;
 
+    let unit = "metric";
+    let URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${unit}&appid=${ApiKey}`;
+    axios.get(URL).then(handleResponse);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function updateCity(event) {
+    setCityName(event.target.value);
+  }
   function handleResponse(response) {
     setWeatherData({
       ready: true,
@@ -24,10 +39,20 @@ export default function Weather(props) {
       icon: response.data.weather[0].icon,
     });
   }
-
   if (weatherData.ready) {
     return (
       <div>
+        <div className="searchBody">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="search"
+              placeholder="Enter a city"
+              onChange={updateCity}
+            />
+            <input type="submit" className="searchButton" value="search" />
+          </form>
+          <button>current</button>
+        </div>
         <TodayData
           windspeedValue={weatherData.windspeed}
           humidityValue={weatherData.humidity}
@@ -43,11 +68,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const ApiKey = `f2178afe12518dc511aab62330608529`;
-
-    let unit = "metric";
-    let URL = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&units=${unit}&appid=${ApiKey}`;
-    axios.get(URL).then(handleResponse);
+    search();
 
     return "Loading";
   }
