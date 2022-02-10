@@ -11,6 +11,25 @@ export default function TodayData(props) {
     fahrenheitStyle: { fontSize: "15px" },
     celsiusStyle: { fontSize: "25px" },
   });
+  let sunriseMin = props.data.sunrise.getMinutes();
+  if (sunriseMin < 10) {
+    sunriseMin = `0${sunriseMin}`;
+  }
+  let sunriseHour = props.data.sunrise.getHours();
+  if (sunriseHour < 10) {
+    sunriseHour = `0${sunriseHour}`;
+  }
+  let sunrise = `${sunriseHour}:${sunriseMin}`;
+
+  let sunseteMin = props.data.sunset.getMinutes();
+  if (sunseteMin < 10) {
+    sunseteMin = `0${sunseteMin}`;
+  }
+  let sunsetHour = props.data.sunset.getHours();
+  if (sunsetHour < 10) {
+    sunsetHour = `0${sunsetHour}`;
+  }
+  let sunset = `${sunsetHour}:${sunseteMin}`;
 
   function celsius(event) {
     event.preventDefault();
@@ -35,10 +54,10 @@ export default function TodayData(props) {
 
   return (
     <div className="bodyMain">
-      <span className="cityName child"> {props.cityValue}</span>
-      <span className="tempMinMax child"> {props.minmaxValue}</span>
+      <span className="cityName child"> {props.data.city}</span>
+      <span className="tempMinMax child"> {props.data.MinMax}</span>
       <span className="day child"> {Day()}</span>
-      <span className="temperature child">{props.tempValue}°</span>
+      <span className="temperature child">{props.data.temp}°</span>
       <span className="units child">
         <a
           href=""
@@ -61,18 +80,18 @@ export default function TodayData(props) {
       <span className="date child">{Date()}</span>
       <span className="icon child">
         <img
-          src={`http://openweathermap.org/img/wn/${props.iconID}@2x.png`}
+          src={`http://openweathermap.org/img/wn/${props.data.icon}@2x.png`}
           alt="weather icon"
         />
       </span>
       <span className="parameters child">
-        <div>Windspeed: {props.windspeedValue} </div>
-        <div>Humidity: {props.humidityValue}</div>
-        <div>Sunrise: {props.sunriseValue}</div>
-        <div>Sunset: {props.sunsetValue}</div>
+        <div>Windspeed: {props.data.windspeed} </div>
+        <div>Humidity: {props.data.humidity}</div>
+        <div>Sunrise: {sunrise}</div>
+        <div>Sunset: {sunset}</div>
       </span>
 
-      <span className="description child">{props.descriptionValue}</span>
+      <span className="description child">{props.data.description}</span>
     </div>
   );
 }

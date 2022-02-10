@@ -14,18 +14,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <div className="searchBody">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="search"
-            placeholder="Enter a city"
-            onChange={updateCity}
-          />
-          <input type="submit" className="searchButton" value="search" />
-        </form>
-        <button>current</button>
-      </div> */}
-
       <Weather city={"london"} />
 
       <div id="opnSrcLink">

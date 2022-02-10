@@ -38,7 +38,7 @@
   text-align: left;
 }
 .parameters {
-  margin-top: -40px;
+  margin-top: -20px;
   width: 40%;
   text-align: left;
   font-size: 18px;
@@ -62,7 +62,6 @@
 }
 .date {
   height: 50px;
-  margin-top: -20px;
   width: 40%;
   text-align: left;
   font-size: 18px;

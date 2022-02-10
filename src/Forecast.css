@@ -27,5 +27,8 @@
 
 .forcast {
   display: inline-block;
-  margin: 4px 3.3%;
+  margin: 4px -1%;
+}
+#icon {
+  width: 60%;
 }
