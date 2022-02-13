@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import BeatLoader from "react-spinners/BeatLoader";
 import TodayData from "./TodayData";
 import Forecast from "./Forecast";
 
@@ -26,6 +27,7 @@ export default function Weather(props) {
   }
   function handleSubmit(event) {
     event.preventDefault();
+    setForecast({ ready: false });
     search();
   }
 
@@ -92,6 +94,12 @@ export default function Weather(props) {
   } else {
     search();
 
-    return "Loading";
+    return (
+      <div>
+        <div className="sweet-loading">
+          <BeatLoader color={`#3C7DD9`} size={100} speedMultiplier={0.66} />
+        </div>
+      </div>
+    );
   }
 }
