@@ -6,8 +6,6 @@ export default function Forecast(props) {
   let dayName = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   let days = [0, 1, 2, 3, 4];
 
-  console.log(props);
-
   return (
     <div className="body">
       {days.map((i) => {
@@ -25,7 +23,7 @@ export default function Forecast(props) {
                 id="icon"
               />
             </div>
-            <div>{props.data.temp[0][i]}</div>
+            <div>{props.unitValue.forecastTemp[i]}</div>
           </span>
         );
       })}

@@ -68,8 +68,9 @@
 }
 .units {
   width: 10%;
-  font-size: 18px;
-  margin-left: -35px;
+  font-size: 20px;
+  padding-top: 13px;
+  margin-left: -20px;
 }
 .temperature {
   width: 20%;
@@ -90,4 +91,12 @@
 .celsius,
 .fahrenheit {
   color: black;
+  text-decoration-line: none;
+}
+
+.celsius {
+  padding-right: 10px;
+}
+.fahrenheit {
+  padding-left: 10px;
 }
