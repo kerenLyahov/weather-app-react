@@ -2,32 +2,27 @@ import React, { useState } from "react";
 import axios from "axios";
 import BeatLoader from "react-spinners/BeatLoader";
 import TodayData from "./TodayData";
+import CurrentLocation from "./CurrentLocation.js";
+import ForecastData from "./ForecastData";
 
 export default function Weather(props) {
   let [weatherData, setWeatherData] = useState({
     ready: false,
     unit: "metric",
   });
-  let [forecast, setForecast] = useState({
-    ready: false,
-  });
+
   let [cityName, setCityName] = useState(props.city);
-  let days = [0, 1, 2, 3, 4];
+
   const ApiKey = `f2178afe12518dc511aab62330608529`;
 
   function search() {
     let URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=${weatherData.unit}&appid=${ApiKey}`;
     axios.get(URL).then(handleResponse);
   }
-  function forecastSearch() {
-    let lat = weatherData.latitude;
-    let lon = weatherData.longitude;
-    let URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${weatherData.unit}&exclude=current,hourly,minutely,alerts&appid=${ApiKey}`;
-    axios.get(URL).then(handleForecastAPI);
-  }
+
   function handleSubmit(event) {
     event.preventDefault();
-    setForecast({ ready: false });
+
     search();
   }
 
@@ -53,35 +48,24 @@ export default function Weather(props) {
       latitude: response.data.coord.lat,
       icon: response.data.weather[0].icon,
     });
-
-    forecastSearch();
   }
-  function handleForecastAPI(response) {
-    setForecast({
-      ready: true,
-      temp: [
-        days.map((i) => {
-          return ` ${Math.round(
-            response.data.daily[i].temp.min
-          )}° /${Math.round(response.data.daily[i].temp.max)}° `;
-        }),
-      ],
-      farenhaitTemp: [
-        days.map((i) => {
-          return ` ${Math.round(
-            (response.data.daily[i].temp.min * 9) / 5 + 32
-          )}° /${Math.round((response.data.daily[i].temp.max * 9) / 5 + 32)}° `;
-        }),
-      ],
 
-      icon: [
-        days.map((i) => {
-          return response.data.daily[i].weather[0].icon;
-        }),
-      ],
-    });
+  function getLocation() {
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          <CurrentLocation data={position} />;
+        },
+        () => {
+          alert("Unable to retrieve your location");
+        }
+      );
+    }
   }
-  if (weatherData.ready && forecast.ready) {
+
+  if (weatherData.ready) {
     return (
       <div>
         <div className="searchBody">
@@ -93,9 +77,10 @@ export default function Weather(props) {
             />
             <input type="submit" className="searchButton" value="search" />
           </form>
-          <button>current</button>
+          <button onClick={getLocation}>current</button>
         </div>
-        <TodayData data={weatherData} futurData={forecast} />
+        <TodayData data={weatherData} />
+        <ForecastData data={weatherData} />
       </div>
     );
   } else {

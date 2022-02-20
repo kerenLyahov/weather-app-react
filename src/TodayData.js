@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import "./TodayData.css";
 import Day from "./Day.js";
 import Date from "./Date.js";
-import Forecast from "./Forecast";
 
 export default function TodayData(props) {
-  let days = [0, 1, 2, 3, 4];
   let sunriseMin = props.data.sunrise.getMinutes();
   if (sunriseMin < 10) {
     sunriseMin = `0${sunriseMin}`;
@@ -33,9 +31,6 @@ export default function TodayData(props) {
     fahrenheitStyle: { color: "#757585" },
     celsiusStyle: { color: "black" },
     temperature: props.data.temp,
-    forecastTemp: days.map((i) => {
-      return props.futurData.temp[0][i];
-    }),
   });
 
   function celsius(event) {
@@ -45,9 +40,6 @@ export default function TodayData(props) {
       fahrenheitStyle: { color: "#757585" },
       celsiusStyle: { color: "black" },
       temperature: props.data.temp,
-      forecastTemp: days.map((i) => {
-        return props.futurData.temp[0][i];
-      }),
     });
   }
 
@@ -58,12 +50,8 @@ export default function TodayData(props) {
       fahrenheitStyle: { color: "black" },
       celsiusStyle: { color: "#757585" },
       temperature: Math.round((props.data.temp * 9) / 5 + 32),
-      forecastTemp: days.map((i) => {
-        return props.futurData.farenhaitTemp[0][i];
-      }),
     });
   }
-  console.log(unit.forecastTemp);
 
   return (
     <div>
@@ -107,7 +95,6 @@ export default function TodayData(props) {
         </span>
         <span className="description child">{props.data.description}</span>
       </div>
-      <Forecast unitValue={unit} data={props.futurData} />
     </div>
   );
 }
