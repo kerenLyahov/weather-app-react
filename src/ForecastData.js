@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import axios from "axios";
 import "./ForecastData.css";
@@ -12,6 +12,10 @@ export default function ForecastData(props) {
   let [forecast, setForecast] = useState({
     ready: false,
   });
+
+  useEffect(() => {
+    setForecast({ ready: false });
+  }, [props.data.latitude || props.data.longitude]);
 
   function search() {
     let URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.data.latitude}&lon=${props.data.longitude}&units=metric&exclude=current,hourly,minutely,alerts&appid=${ApiKey}`;
@@ -56,12 +60,12 @@ export default function ForecastData(props) {
               </span>
               <div>
                 <img
-                  src={`http://openweathermap.org/img/wn/${forecast.icon[i]}@2x.png`}
+                  src={`http://openweathermap.org/img/wn/${forecast.icon[0][i]}@2x.png`}
                   alt="weather icon"
                   id="icon"
                 />
               </div>
-              <div>{forecast.temp[i]}</div>
+              <div>{forecast.temp[0][i]}</div>
             </span>
           );
         })}
