@@ -32,14 +32,6 @@ export default function ForecastData(props) {
           )}° /${Math.round(response.data.daily[i].temp.max)}° `;
         }),
       ],
-      farenhaitTemp: [
-        days.map((i) => {
-          return ` ${Math.round(
-            (response.data.daily[i].temp.min * 9) / 5 + 32
-          )}° /${Math.round((response.data.daily[i].temp.max * 9) / 5 + 32)}° `;
-        }),
-      ],
-
       icon: [
         days.map((i) => {
           return response.data.daily[i].weather[0].icon;

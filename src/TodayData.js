@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./TodayData.css";
 import Day from "./Day.js";
 import Date from "./Date.js";
@@ -24,61 +24,17 @@ export default function TodayData(props) {
   }
   let sunset = `${sunsetHour}:${sunseteMin}`;
 
-  let celsiusValue = "C";
-  let fahrenheitValue = "F";
-  let [unit, setUnit] = useState({
-    unit: `metric`,
-    fahrenheitStyle: { color: "#757585" },
-    celsiusStyle: { color: "black" },
-    temperature: props.data.temp,
-  });
-
-  function celsius(event) {
-    event.preventDefault();
-    setUnit({
-      unit: `metric`,
-      fahrenheitStyle: { color: "#757585" },
-      celsiusStyle: { color: "black" },
-      temperature: props.data.temp,
-    });
-  }
-
-  function fahrenheit(event) {
-    event.preventDefault();
-    setUnit({
-      unit: `imperial`,
-      fahrenheitStyle: { color: "black" },
-      celsiusStyle: { color: "#757585" },
-      temperature: Math.round((props.data.temp * 9) / 5 + 32),
-    });
-  }
-
   return (
     <div>
       <div className="bodyMain">
         <span className="cityName child"> {props.data.city}</span>
-        <span className="tempMinMax child"> {props.data.MinMax}</span>
-        <span className="day child"> {Day()}</span>
-        <span className="temperature child">{unit.temperature}°</span>
-        <span className="units child">
-          <a
-            href=""
-            className="celsius"
-            style={unit.celsiusStyle}
-            onClick={celsius}
-          >
-            {celsiusValue}
-          </a>
-          |
-          <a
-            href=""
-            className="fahrenheit"
-            style={unit.fahrenheitStyle}
-            onClick={fahrenheit}
-          >
-            {fahrenheitValue}
-          </a>
+        <span className="tempMinMax child">
+          <span className="min">⬇{props.data.min}° </span>
+          <span className="max"> ⬆{props.data.max}°</span>
         </span>
+        <span className="day child"> {Day()}</span>
+        <span className="temperature child">{props.data.temp}°C</span>
+        {/* <span className="units child">C</span> */}
         <span className="date child">{Date()}</span>
         <span className="icon child">
           <img
